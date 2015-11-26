@@ -1,0 +1,243 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Simple Postgres Database Setup</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=eb9ba96298">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin">
+    
+    <meta property="og:site_name" content="The Hungry Coder">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Simple Postgres Database Setup">
+    <meta property="og:description" content="This is a short and sweet post on how to set up your Postgres database in your terminal. While there are many great resources out there to help you out once you've set up your database, the information seems to...">
+    <meta property="og:url" content="http://localhost:2368/simple-postgres-database-setup/">
+    <meta property="article:published_time" content="2015-11-26T03:17:38.363Z">
+    <meta property="article:modified_time" content="2015-11-26T04:27:46.066Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Simple Postgres Database Setup">
+    <meta name="twitter:description" content="This is a short and sweet post on how to set up your Postgres database in your terminal. While there are many great resources out there to help you out once you've set up your database, the information seems to...">
+    <meta name="twitter:url" content="http://localhost:2368/simple-postgres-database-setup/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "The Hungry Coder",
+    "author": {
+        "@type": "Person",
+        "name": "Tina Lai",
+        "url": "http://localhost:2368/author/tina",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "Simple Postgres Database Setup",
+    "url": "http://localhost:2368/simple-postgres-database-setup/",
+    "datePublished": "2015-11-26T03:17:38.363Z",
+    "dateModified": "2015-11-26T04:27:46.066Z",
+    "description": "This is a short and sweet post on how to set up your Postgres database in your terminal. While there are many great resources out there to help you out once you&#x27;ve set up your database, the information seems to..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7">
+    <link rel="alternate" type="application/rss+xml" title="The Hungry Coder" href="../rss/index.html">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Simple Postgres Database Setup</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-11-25">25 November 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>This is a short and sweet post on how to set up your Postgres database in your terminal.</p>
+
+<p>While there are many great resources out there to help you out once you've set up your database, the information seems to be scattered and for a newbie there are things that I didn't know about setting up a database. I hope that with this guide it will clear up some of the same confusions I've had and make setting up a database as painless as possible!</p>
+
+<p><mark>Before you start</mark></p>
+
+<p><strong>*Make sure Postgres, pg, and sql (optional) are installed on your computer</strong></p>
+
+<p><a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">Detailed installation guide for Postgres</a> <br>
+<a href="https://www.npmjs.com/package/pg">Guide to install pg with npm</a> <br>
+<a href="https://www.npmjs.com/package/sql">Guide to install sql with npm</a> - You need this if you want to build your SQL statements with javascript. </p>
+
+<p><strong>**Double check that there is no Postgres database server running in the background if you already have Postgres installed.</strong></p>
+
+<p><a href="http://www.postgresql.org/docs/9.1/static/server-shutdown.html">How to shut down Postgres server</a></p>
+
+<hr>
+
+<h4 id="nowfortherealfun">Now for the real fun</h4>
+
+<p>(The following steps are inside your terminal.)</p>
+
+<p><strong>1. Set Up (Create new folder):</strong> </p>
+
+<p><mark>This is a very important step. Your new database needs to be set up in an empty folder. Otherwise, other files will mess with the new database.</mark></p>
+
+<p>Locate your project folder inside the terminal. </p>
+
+<p>Type the command:  </p>
+
+<pre><code>$ mkdir "foldername"
+</code></pre>
+
+<p>The <code>$</code> sign in the commands is an indicator of a new line in the terminal. </p>
+
+<p>Omit the double quotes " " when typing in your own folder name here and in following examples. The quotes are just to indicate the word quoted is a placeholder word.</p>
+
+<p><code>mkdir</code> creates an empty folder in the project's root directory.</p>
+
+<p><em>Optionally, you can create a folder in your project's root directory in Finder.</em></p>
+
+<p><strong>2. Initialize Database:</strong>  </p>
+
+<p>Go to your project folder's root directory (this will be one level up from the database folder you have just created.)</p>
+
+<p>Type the command:  </p>
+
+<pre><code>$ initdb "foldername"
+</code></pre>
+
+<p><strong>3. Starting Database Server:</strong></p>
+
+<p>Type the command:  </p>
+
+<pre><code>$ postges -D "foldername"
+</code></pre>
+
+<p><strong>4. Create Database Owner/User:</strong> </p>
+
+<p>In a separate terminal window.</p>
+
+<p>Type the command:  </p>
+
+<pre><code>$ createuser "name"
+</code></pre>
+
+<p>(The standard username is <strong>root</strong>, but it can be any name you want. Just remember what name you set your user to.)</p>
+
+<p><strong>5. Create the Database:</strong>  </p>
+
+<p>In the same terminal window as step 4</p>
+
+<p>Type the command:  </p>
+
+<pre><code>$ createdb "databasename" -O "username"
+</code></pre>
+
+<p>*Alphabet 'O' as in Owner. Not the number zero.</p>
+
+<p>(The <code>-O "username"</code> sets up the database to allow the owner with that username to configure and manage the database. 
+This is good practice for working with a group. Just share the username with the rest of your group so they can have access to the database too.)</p>
+
+<p><strong>6. Get Inside Your Database:</strong></p>
+
+<p>In another terminal window</p>
+
+<p>Type the command:  </p>
+
+<pre><code>$ psql "databasename"
+</code></pre>
+
+<p>(This command will take you inside your database environment where you can perform SQL tasks like insert a table, populate your table and query your data with SQL commands.)</p>
+
+<hr>
+
+<p>There you have it. Six simple steps to setup your Postgres database and now off you go to have fun in SQL land!</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/tina/">Tina Lai</a></h4>
+
+                    <p>Read <a href="../author/tina/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    <span class="author-location icon-location">Los Angeles. Where the sun always shines, and the drought is real. Now where's that taco?</span>
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Simple%20Postgres%20Database%20Setup&amp;url=http://localhost:2368/simple-postgres-database-setup/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/simple-postgres-database-setup/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/simple-postgres-database-setup/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="../">The Hungry Coder</a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=eb9ba96298"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=eb9ba96298"></script>
+
+</body>

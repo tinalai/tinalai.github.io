@@ -1,0 +1,98 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>The Hungry Coder</title><description>Always learning, always eating.</description><link>http://localhost:2368/</link><generator>Ghost 0.7</generator><lastBuildDate>Thu, 26 Nov 2015 04:35:55 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Simple Postgres Database Setup</title><description>&lt;p&gt;This is a short and sweet post on how to set up your Postgres database in your terminal.&lt;/p&gt;
+
+&lt;p&gt;While there are many great resources out there to help you out once you've set up your database, the information seems to be scattered and for a newbie there are things that&lt;/p&gt;</description><link>http://localhost:2368/simple-postgres-database-setup/</link><guid isPermaLink="false">4fec485a-72fa-423b-9b15-8d2dcb47215c</guid><dc:creator>Tina Lai</dc:creator><pubDate>Thu, 26 Nov 2015 03:17:38 GMT</pubDate><content:encoded>&lt;p&gt;This is a short and sweet post on how to set up your Postgres database in your terminal.&lt;/p&gt;
+
+&lt;p&gt;While there are many great resources out there to help you out once you've set up your database, the information seems to be scattered and for a newbie there are things that I didn't know about setting up a database. I hope that with this guide it will clear up some of the same confusions I've had and make setting up a database as painless as possible!&lt;/p&gt;
+
+&lt;p&gt;&lt;mark&gt;Before you start&lt;/mark&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;*Make sure Postgres, pg, and sql (optional) are installed on your computer&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides"&gt;Detailed installation guide for Postgres&lt;/a&gt; &lt;br&gt;
+&lt;a href="https://www.npmjs.com/package/pg"&gt;Guide to install pg with npm&lt;/a&gt; &lt;br&gt;
+&lt;a href="https://www.npmjs.com/package/sql"&gt;Guide to install sql with npm&lt;/a&gt; - You need this if you want to build your SQL statements with javascript. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;**Double check that there is no Postgres database server running in the background if you already have Postgres installed.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://www.postgresql.org/docs/9.1/static/server-shutdown.html"&gt;How to shut down Postgres server&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h4 id="nowfortherealfun"&gt;Now for the real fun&lt;/h4&gt;
+
+&lt;p&gt;(The following steps are inside your terminal.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Set Up (Create new folder):&lt;/strong&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;mark&gt;This is a very important step. Your new database needs to be set up in an empty folder. Otherwise, other files will mess with the new database.&lt;/mark&gt;&lt;/p&gt;
+
+&lt;p&gt;Locate your project folder inside the terminal. &lt;/p&gt;
+
+&lt;p&gt;Type the command:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir "foldername"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;$&lt;/code&gt; sign in the commands is an indicator of a new line in the terminal. &lt;/p&gt;
+
+&lt;p&gt;Omit the double quotes " " when typing in your own folder name here and in following examples. The quotes are just to indicate the word quoted is a placeholder word.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;mkdir&lt;/code&gt; creates an empty folder in the project's root directory.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Optionally, you can create a folder in your project's root directory in Finder.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Initialize Database:&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;Go to your project folder's root directory (this will be one level up from the database folder you have just created.)&lt;/p&gt;
+
+&lt;p&gt;Type the command:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ initdb "foldername"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Starting Database Server:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Type the command:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ postges -D "foldername"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Create Database Owner/User:&lt;/strong&gt; &lt;/p&gt;
+
+&lt;p&gt;In a separate terminal window.&lt;/p&gt;
+
+&lt;p&gt;Type the command:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ createuser "name"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(The standard username is &lt;strong&gt;root&lt;/strong&gt;, but it can be any name you want. Just remember what name you set your user to.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. Create the Database:&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;In the same terminal window as step 4&lt;/p&gt;
+
+&lt;p&gt;Type the command:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ createdb "databasename" -O "username"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;*Alphabet 'O' as in Owner. Not the number zero.&lt;/p&gt;
+
+&lt;p&gt;(The &lt;code&gt;-O "username"&lt;/code&gt; sets up the database to allow the owner with that username to configure and manage the database. 
+This is good practice for working with a group. Just share the username with the rest of your group so they can have access to the database too.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6. Get Inside Your Database:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In another terminal window&lt;/p&gt;
+
+&lt;p&gt;Type the command:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ psql "databasename"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(This command will take you inside your database environment where you can perform SQL tasks like insert a table, populate your table and query your data with SQL commands.)&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;There you have it. Six simple steps to setup your Postgres database and now off you go to have fun in SQL land!&lt;/p&gt;</content:encoded></item></channel></rss>
